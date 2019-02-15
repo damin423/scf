@@ -14,7 +14,7 @@ spring:
 #      max-connections: 5
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:oracle:thin:@192.168.10.200:1521:XE
+    url: jdbc:oracle:thin:@localhost:1521:ORCL
     driver-class-name: oracle.jdbc.OracleDriver
     username: scf
     password: 123456
