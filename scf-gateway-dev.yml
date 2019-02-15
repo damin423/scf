@@ -1,0 +1,65 @@
+spring:
+  cloud:
+    gateway:
+      locator:
+        enabled: true
+      routes:
+      # 认证中心
+      - id: scf-auth
+        uri: lb://scf-auth
+        predicates:
+        - Path=/auth/**
+        filters:
+          # 验证码处理
+        - ImageCodeGatewayFilter
+          # 前端密码解密
+        - PasswordDecoderFilter
+        - StripPrefix=1
+      #UPMS 模块
+      - id: scf-upms
+        uri: lb://scf-upms
+        predicates:
+        - Path=/admin/**
+        filters:
+          # Swagger请求头处理
+        - SwaggerHeaderFilter
+          # 请求头清理避免不合法请求头
+        - name: RemoveRequestHeader
+          args:
+            name: from
+          # 限流配置
+        - name: RequestRateLimiter
+          args:
+            key-resolver: '#{@remoteAddrKeyResolver}'
+            redis-rate-limiter.replenishRate: 10
+            redis-rate-limiter.burstCapacity: 20
+        - StripPrefix=1
+          # 降级配置
+        - name: Hystrix
+          args:
+            name: default
+            fallbackUri: 'forward:/fallback'
+      # 定时任务模块
+      - id: scf-daemon
+        uri: lb://scf-daemon
+        predicates:
+        - Path=/daemon/**
+        filters:
+        - StripPrefix=1
+        # demo
+      - id: scf-demo
+        uri: lb://scf-demo
+        predicates:
+        - Path=/demo/**
+        filters:
+        - StripPrefix=1
+
+security:
+  encode:
+    # 前端密码密钥，必须16位
+    key: 'scfscfscfscfscf1'
+
+# 不校验验证码终端
+ignore:
+  clients:
+    - test
