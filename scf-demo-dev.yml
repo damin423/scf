@@ -19,7 +19,7 @@ spring:
     username: scf
     password: 123456
   jms:
-    pub-sub-domain: true
+    pub-sub-domain: false
   activemq:
     broker-url: tcp://127.0.0.1:61616
     user: admin
@@ -43,4 +43,4 @@ scf:
     jms:
       username: weblogic
       password: welcome1
-      url: t3://192.168.10.111:7001
+      url: t3://localhost:7001

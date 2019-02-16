@@ -8,11 +8,12 @@ spring:
 redis:
   password: redisgdmsa790
   host: localhost
-#  rabbitmq:
-#    host: 127.0.0.1
-#    port: 5672
-#    username: scf
-#    password: 123456
+
+rabbitmq:
+  host: 127.0.0.1
+  port: 5672
+  username: scf
+  password: 123456
 # 暴露监控端点
 management:
   endpoints:
@@ -112,7 +113,7 @@ scf:
   jms:
     message:
       jndiFactory: weblogic.jndi.WLInitialContextFactory
-      url: t3://192.168.10.111:49163
+      url: t3://localhost:49163
       username: weblogic
       password: welcome1
 
