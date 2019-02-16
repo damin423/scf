@@ -5,9 +5,9 @@ jasypt:
 # redis 相关
 spring:
 
-#  redis:
-#    password: 12345
-#    host: localhost
+redis:
+  password: redisgdmsa790
+  host: localhost
 #  rabbitmq:
 #    host: 127.0.0.1
 #    port: 5672
