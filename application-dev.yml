@@ -4,16 +4,15 @@ jasypt:
     password: scf #根密码
 # redis 相关
 spring:
+  redis:
+    password: redisgdmsa790
+    host: 127.0.0.1
 
-redis:
-  password: redisgdmsa790
-  host: localhost
-
-rabbitmq:
-  host: 127.0.0.1
-  port: 5672
-  username: scf
-  password: 123456
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: scf
+    password: 123456
 # 暴露监控端点
 management:
   endpoints:
